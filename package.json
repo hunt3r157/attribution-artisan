@@ -27,12 +27,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-username/attribution-artisan.git"
+    "url": "git+https://github.com/hunt3r157/attribution-artisan.git"
   },
   "bugs": {
-    "url": "https://github.com/your-username/attribution-artisan/issues"
+    "url": "https://github.com/hunt3r157/attribution-artisan/issues"
   },
-  "homepage": "https://github.com/your-username/attribution-artisan#readme",
+  "homepage": "https://github.com/hunt3r157/attribution-artisan#readme",
   "scripts": {
     "artisan:generate": "node bin/attribution-artisan.mjs generate"
   }

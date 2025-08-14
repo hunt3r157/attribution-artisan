@@ -2,8 +2,8 @@
 
 > Zero‑dep CLI + GitHub Action that **generates THIRD_PARTY_NOTICES.md** from your installed dependencies and (optionally) **embeds license texts** for MIT/BSD, etc. Pairs perfectly with **License Lens**.
 
-[![build](https://img.shields.io/github/actions/workflow/status/<your-username>/attribution-artisan/ci.yml?branch=main&label=build)](https://github.com/<your-username>/attribution-artisan/actions/workflows/ci.yml)
-[![release](https://img.shields.io/github/actions/workflow/status/<your-username>/attribution-artisan/release.yml?label=release)](https://github.com/<your-username>/attribution-artisan/actions/workflows/release.yml)
+[![build](https://img.shields.io/github/actions/workflow/status/hunt3r157/attribution-artisan/ci.yml?branch=main&label=build)](https://github.com/hunt3r157/attribution-artisan/actions/workflows/ci.yml)
+[![release](https://img.shields.io/github/actions/workflow/status/hunt3r157/attribution-artisan/release.yml?label=release)](https://github.com/hunt3r157/attribution-artisan/actions/workflows/release.yml)
 [![npm](https://img.shields.io/npm/v/attribution-artisan.svg)](https://www.npmjs.com/package/attribution-artisan)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
@@ -135,7 +135,7 @@ jobs:
 
 ### Composite Action usage (after you publish)
 ```yaml
-- uses: <your-username>/attribution-artisan@v1
+- uses: hunt3r157/attribution-artisan@v1
 ```
 
 ---

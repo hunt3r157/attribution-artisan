@@ -5,13 +5,20 @@ import path from 'node:path';
 import process from 'node:process';
 
 const args = process.argv.slice(2);
-const cmd = (args[0] && !args[0].startsWith('-')) ? args[0] : 'generate';
-const flags = Object.fromEntries(
-  args.filter(a => a.startsWith('--')).map(a => {
-    const [k, v] = a.replace(/^--/, '').split('=');
-    return [k, v === undefined ? true : v];
-  })
-);
+// robust flag parser: supports "--k v", "--k=v", and bare "--k"
+function parseFlags(arr){
+  const o={};
+  for (let i=0;i<arr.length;i++){
+    const a=arr[i];
+    if (!a.startsWith('--')) continue;
+    const nxt = arr[i+1];
+    if (nxt && !nxt.startsWith('--')) { o[a.slice(2)] = nxt; i++; }
+    else { const [k,v] = a.slice(2).split('='); o[k] = v ?? true; }
+  }
+  return o;
+}
+const flags = parseFlags(args);
+const cmd = (args[0] && !args[0].startsWith('--')) ? args[0] : 'generate';
 if (cmd !== 'generate') { usage(); process.exit(1); }
 
 const cwd = process.cwd();
@@ -27,8 +34,8 @@ if (!fs.existsSync(nodeModules)) {
 const pkgs = scanNodeModules(nodeModules, cfg.exclude);
 const embeddedTexts = buildEmbeddedTexts(pkgs, root, cfg.includeTexts);
 const md = renderMarkdown(pkgs, embeddedTexts, cfg);
-const fmt = (flags.format || 'md').toLowerCase();
-const out = flags.out || 'THIRD_PARTY_NOTICES.md';
+const fmt = (typeof flags.format === 'string' && flags.format) ? flags.format.toLowerCase() : 'md';
+const out = (typeof flags.out === 'string' && flags.out) ? flags.out : 'THIRD_PARTY_NOTICES.md';
 
 if (fmt === 'md' || fmt === 'both') {
   fs.writeFileSync(path.join(root, out), md, 'utf8');
@@ -71,7 +78,9 @@ function loadConfig(root, flags) {
   if (fs.existsSync(p)) {
     try { cfg = { ...cfg, ...JSON.parse(fs.readFileSync(p, 'utf8')) }; } catch {}
   }
-  if (flags['include-texts']) cfg.includeTexts = String(flags['include-texts']).split(',').map(s => s.trim()).filter(Boolean);
+  if (typeof flags['include-texts'] === 'string') {
+  cfg.includeTexts = flags['include-texts'].split(',').map(s=>s.trim()).filter(Boolean);
+}
   return cfg;
 }
 

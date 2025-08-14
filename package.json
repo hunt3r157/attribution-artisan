@@ -1,0 +1,39 @@
+{
+  "name": "attribution-artisan",
+  "version": "0.1.0",
+  "description": "Generate THIRD_PARTY_NOTICES.md and JSON from installed dependencies. Zero-dep CLI + GitHub Action.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "attribution-artisan": "bin/attribution-artisan.mjs"
+  },
+  "files": [
+    "bin",
+    "README.md",
+    "LICENSE",
+    ".github/actions/attribution-artisan/action.yml",
+    "templates/licenses"
+  ],
+  "keywords": [
+    "license",
+    "notice",
+    "compliance",
+    "oss",
+    "third-party",
+    "github-actions"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/attribution-artisan.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/attribution-artisan/issues"
+  },
+  "homepage": "https://github.com/your-username/attribution-artisan#readme",
+  "scripts": {
+    "artisan:generate": "node bin/attribution-artisan.mjs generate"
+  }
+}

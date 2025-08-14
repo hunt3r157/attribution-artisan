@@ -1,0 +1,17 @@
+name: 'Attribution Artisan'
+description: 'Generate THIRD_PARTY_NOTICES.md from installed dependencies; optionally embed license texts'
+inputs:
+  format:
+    required: false
+    description: 'md | json | both'
+    default: 'md'
+  out:
+    required: false
+    description: 'Output filename for Markdown (default THIRD_PARTY_NOTICES.md)'
+runs:
+  using: 'composite'
+  steps:
+    - shell: bash
+      run: |
+        if [ -f package-lock.json ]; then npm ci;         elif [ -f pnpm-lock.yaml ]; then corepack enable && pnpm i --frozen-lockfile;         elif [ -f yarn.lock ]; then corepack enable && yarn install --frozen-lockfile;         else echo "No lockfile found, attempting anyway"; fi
+        node bin/attribution-artisan.mjs generate --format "${{ inputs.format }}" $([ -n "${{ inputs.out }}" ] && echo "--out ${{ inputs.out }}")

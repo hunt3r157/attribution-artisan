@@ -1,6 +1,6 @@
 {
   "name": "attribution-artisan",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Generate THIRD_PARTY_NOTICES.md and JSON from installed dependencies. Zero-dep CLI + GitHub Action.",
   "license": "MIT",
   "type": "module",
